@@ -11,9 +11,92 @@
     <link rel="stylesheet" href="./styles/PaginaDeLogin.css" />
     <link rel="stylesheet" href="./styles/CampoDeDigitacao.css" />
     <title>Login | CodeConnect</title>
-</head>
+</head> 
 
 <body>
+
+    <div id="root"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js" integrity="sha512-8Q6Y9XnTbOE+JNvjBQwJ2H8S+UV4uA6hiRykhdtIyDYZ2TprdNmWOUaKdGzOhyr4dCyk287OejbPvwl7lrfqrQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js" integrity="sha512-MOCpqoRoisCTwJ8vQQiciZv0qcpROCidek3GTFS6KTk2+y7munJIlKCVkFCYY+p3ErYFXCjmFjnfTTRSC1OHWQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.24.4/babel.min.js" integrity="sha512-YpL+cyxeD6yi05xXUGpdeHyf7F4LFthEdJvNFp0kGSTssHu0M7kWxVQTZ6jD7s5z5cbibg6JpleJrO2wOKd0YA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/babel">
+        function Titulo ({children}) {
+            return (<h1 className='form__titulo'>{children}</h1>)
+        }
+
+        function SubTitulo({children}) {
+            return (<h2 className='form__texto'>{children}</h2>)
+        }
+
+        function CampoDeDigitacao ({Label, tipo, placeholder, id, value, setValor}) {
+            return (
+                <div className='form__campo-digitacao'>
+                                <label for="email">{Label}</label>
+                                <input type={tipo}
+                                placeholder={placeholder}
+                                required
+                                id={id}
+                                value = {value}
+                                onChange = {(evento) => setValor(evento.target.value)}
+                                />
+                            </div>
+            )
+        }
+
+        function CheckBox() {
+            return (
+                <>
+                <div className='form__campo-checkbox'>
+                    <input type="checkbox" id="lembrar"/> 
+                    <label for="lembrar"/>   
+                </div>
+                <p className='form__opcoes-texto'>Lembrar-me</p>
+                </>
+            )
+        }
+
+        function Botao ({children}) {
+            return (
+                <button className='form__botao' type='submit'>{children} </button>
+            )
+        }
+
+        function PaginadeLogin() {
+
+            const [email, setEmail] = React.useState('')
+            const [senha, setSenha] = React.useState('')
+            
+            const handleSubmit = (evento) => {
+                evento.preventDefault();
+                console.log(`email: ${email}` )
+                console.log(`email: ${senha}` )
+
+            }
+            return (
+                <div className='container-login'>
+                    <img src="/img/imagem-login.png" alt="Mulher negra na tela de login"/>
+                    <section>
+                        <form onSubmit={handleSubmit}>
+                            <Titulo>Login</Titulo>
+                            <SubTitulo>Boas vindas! Seja bem vindo</SubTitulo>
+                            <CampoDeDigitacao Label='E-mail ou usuário'
+                            tipo='email' placeholder='Digite seu email ou usuário' id='email' value={email} setValor={setEmail} />
+                            <CampoDeDigitacao Label='Senha'
+                            tipo='password' placeholder='Digite sua senha' id='senha' value={senha} setValor={setSenha} />
+                            
+                            <CheckBox />
+                            <Botao>Login</Botao>
+                        </form>    
+                    </section>
+                
+                </div>
+
+            )
+        }
+        ReactDOM.createRoot(document.getElementById('root')).render(<PaginadeLogin />)
+
+    </script>
+    </script>
 
 </body>
 
